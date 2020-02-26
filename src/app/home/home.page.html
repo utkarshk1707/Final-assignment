@@ -1,20 +1,66 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="title">
+      TraceKen
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content class="ion-padding">
+  <div class="ion-padding">
+
+    <ion-img src="../../assets/logo.png"></ion-img>
+    <div id="description">Register</div>
+
+    <form [formGroup]="Form">
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-label class="floatingLabel" position="floating">Fisrst Name</ion-label>
+              <ion-input [(ngModel)]="idText" formControlName="idTextValidation"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-label class="floatingLabel" position="floating">last Name</ion-label>
+              <ion-input [(ngModel)]="idText" formControlName="idTextValidation"></ion-input>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-item>
+      <div><span *ngIf="!assetForm.get('idTextValidation').valid && assetForm.get('idTextValidation').touched ">Enter
+          valid Name</span></div>
+      <ion-item>
+        <ion-label class="floatingLabel" position="floating">sex</ion-label>
+        <ion-input [(ngModel)]="sex" formControlName="sexValidation"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label class="floatingLabel" position="floating">DOB</ion-label>
+        <ion-input [(ngModel)]="DOB" formControlName="DOB"></ion-input>
+      </ion-item>
+      <div><span
+          *ngIf="!assetForm.get('lotNumberValidation').valid && assetForm.get('lotNumberValidation').touched ">INVALID
+          DOB</span></div>
+
+    </form>
   </div>
+  <ng-container *ngIf=>
+    <ion-button class="stickToBottom" [disabled]="false" expand="block" (click)="submit()">
+      Submit
+    </ion-button>
+  </ng-container>
 </ion-content>
+<ion-footer>
+  <!-- <div class="ion-padding-horizontal">
+      <ion-button class="stickToBottom" [disabled] ="!ifSSCC() || !assetForm.valid " expand="block" (click)="getHistory()">Get History</ion-button>
+  </div> -->
+  <ng-container>
+    <ion-button class="stickToBottom" [disabled]="!assetForm.valid" expand="block" (click)="googleSignIn()">
+      Google signin
+    </ion-button>
+  </ng-container>
+</ion-footer>

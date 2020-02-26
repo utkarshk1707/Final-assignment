@@ -1,5 +1,7 @@
 {
   "name": "Hotel Booking",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
