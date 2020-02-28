@@ -11,14 +11,19 @@
         <ion-col>
           <ion-item>
             <ion-label>Start Date</ion-label>
-            <ion-datetime displayFormat="MM DD YY" placeholder="Select Date"></ion-datetime>
+            <ion-datetime [(ngModel)]="startDate" displayFormat="MM/DD/YY" placeholder="Select Date"></ion-datetime>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-label>End Date</ion-label>
-          <ion-datetime displayFormat="MM DD YY" placeholder="Select Date"></ion-datetime>
+          <ion-datetime [(ngModel)]="endDate" displayFormat="MM/DD/YY" placeholder="Select Date"></ion-datetime>
         </ion-col>
       </ion-row>
+      <ion-col>
+        <IonItem>
+          <IonLabel></IonLabel>
+        </IonItem>  
+      </ion-col>
     </ion-grid>
   </div>
 </ion-content>

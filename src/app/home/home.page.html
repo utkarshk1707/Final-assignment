@@ -10,56 +10,71 @@
 </ion-header>
 
 
-<ion-content class="ion-padding">
+<ion-content class="loginContent">
   <div class="ion-padding">
 
-    <ion-img src="../../assets/logo.png"></ion-img>
+    <!-- <ion-img src="../../assets/logo.png"></ion-img> -->
     <div id="description">Register</div>
-
+    
+<!-- 
     <form [formGroup]="Form">
       <ion-item>
         <ion-grid>
           <ion-row>
             <ion-col>
-              <ion-label class="floatingLabel" position="floating">Fisrst Name</ion-label>
-              <ion-input [(ngModel)]="idText" formControlName="idTextValidation"></ion-input>
+              <ion-label class="floatingLabel" position="floating">First Name</ion-label>
+              <ion-input [(ngModel)]="firstName" formControlName="idTextValidation"></ion-input>
             </ion-col>
             <ion-col>
               <ion-label class="floatingLabel" position="floating">last Name</ion-label>
-              <ion-input [(ngModel)]="idText" formControlName="idTextValidation"></ion-input>
+              <ion-input [(ngModel)]="lastName" formControlName="idTextValidation"></ion-input>
             </ion-col>
+          </ion-row>
+          <div><span *ngIf="!Form.get('idTextValidation').valid && Form.get('idTextValidation').touched ">Enter
+              valid Name</span></div>
+
+          <ion-row>
+            <ion-item>
+              <ion-label class="floatingLabel" position="floating">Gender</ion-label>
+              <IonSelect [(ngModel)]="Gender" formControlName="GenderValidation" placeholder="Select One">
+                <IonSelectOption value="f">Female</IonSelectOption>
+                <IonSelectOption value="m">Male</IonSelectOption>
+              </IonSelect>
+            </ion-item>
+          </ion-row>
+
+          <ion-row>
+            <ion-item>
+              <ion-label class="floatingLabel" position="floating">Contact</ion-label>
+              <ion-input [(ngModel)]="Contact" formControlName="Contactvalidation"></ion-input>
+            </ion-item>
+          </ion-row>
+
+          <ion-row>
+            <ion-item>
+              <ion-label class="floatingLabel" position="floating">DOB</ion-label>
+              <ion-input [(ngModel)]="DOB" formControlName="DOBvalidation"></ion-input>
+            </ion-item>
+            <div><span *ngIf="!Form.get('DOBValidation').valid && Form.get('DOBValidation').touched ">INVALID
+                DOB</span></div>
+      
           </ion-row>
         </ion-grid>
 
       </ion-item>
-      <div><span *ngIf="!assetForm.get('idTextValidation').valid && assetForm.get('idTextValidation').touched ">Enter
-          valid Name</span></div>
-      <ion-item>
-        <ion-label class="floatingLabel" position="floating">sex</ion-label>
-        <ion-input [(ngModel)]="sex" formControlName="sexValidation"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label class="floatingLabel" position="floating">DOB</ion-label>
-        <ion-input [(ngModel)]="DOB" formControlName="DOB"></ion-input>
-      </ion-item>
-      <div><span
-          *ngIf="!assetForm.get('lotNumberValidation').valid && assetForm.get('lotNumberValidation').touched ">INVALID
-          DOB</span></div>
+
 
     </form>
   </div>
-  <ng-container *ngIf=>
-    <ion-button class="stickToBottom" [disabled]="false" expand="block" (click)="submit()">
+  <ng-container>
+    <ion-button class="stickToBottom" [disabled]="!Form.valid" expand="block" (click)="submit()">
       Submit
     </ion-button>
-  </ng-container>
+  </ng-container> -->
 </ion-content>
 <ion-footer>
-  <!-- <div class="ion-padding-horizontal">
-      <ion-button class="stickToBottom" [disabled] ="!ifSSCC() || !assetForm.valid " expand="block" (click)="getHistory()">Get History</ion-button>
-  </div> -->
   <ng-container>
-    <ion-button class="stickToBottom" [disabled]="!assetForm.valid" expand="block" (click)="googleSignIn()">
+    <ion-button class="stickToBottom" [disabled]="!Form.valid" expand="block" (click)="googleSignIn()">
       Google signin
     </ion-button>
   </ng-container>

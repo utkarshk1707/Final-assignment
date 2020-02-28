@@ -8,6 +8,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { PathLocationStrategy, LocationStrategy } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,7 +18,11 @@ import { AppRoutingModule } from './app-routing.module';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    FormsModule,
+    ReactiveFormsModule,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Location,
+        { provide: LocationStrategy, useClass: PathLocationStrategy }     
   ],
   bootstrap: [AppComponent]
 })

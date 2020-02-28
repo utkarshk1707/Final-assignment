@@ -1,23 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-register',
+  templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class RegisterPage implements OnInit {
 
-  form;
-  password
   constructor(private  router:  Router) { }
 
   ngOnInit() {
   }
 
-  login(form){
+  register(form) {
       this.router.navigateByUrl('home');
-  
   }
 }

@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HotelPage implements OnInit {
 
+  Gender :String;
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }
