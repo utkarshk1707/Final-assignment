@@ -11,14 +11,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { PathLocationStrategy, LocationStrategy } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
+import { SQLite } from '@ionic-native/sqlite/ngx';
+ 
+import { HttpClientModule } from '@angular/common/http';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,
     FormsModule,
+    SQLite,
+    SQLitePorter,
     ReactiveFormsModule,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Location,
