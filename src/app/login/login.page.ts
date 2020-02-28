@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -9,8 +10,9 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  form;
-  password
+  form :FormGroup;
+  password:string;
+  email : string;
   constructor(private  router:  Router) { }
 
   ngOnInit() {
