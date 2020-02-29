@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
-import { DatabaseService } from '../services/database.service';
+import { DatabaseService, Hotels } from '../services/database.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,9 +12,9 @@ import { Observable } from 'rxjs';
 export class RegisterPage implements OnInit {
 
   products: Observable<any[]>;
-  developers : any;
-  developer = {};
-  product = {};
+  Hotels : Hotels[];
+  Hotel = {};
+  userData = {};
  
   email: string;
   form: FormGroup;
@@ -24,9 +24,9 @@ export class RegisterPage implements OnInit {
     this.db.getDatabaseState().subscribe(rdy => {
       if (rdy) {
         this.db.getDevs().subscribe(devs => {
-          this.developers = devs;
+          this.Hotel = devs;
         })
-        this.products = this.db.getProducts();
+        this.userData = this.db.getProducts();
       }
     });
   }
