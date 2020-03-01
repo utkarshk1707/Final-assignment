@@ -45,7 +45,7 @@ export class RegisterPage implements OnInit {
       
 
     }catch(e){
-      console.log(e)
+      console.log("register error:"+e)
     }
       
   }
