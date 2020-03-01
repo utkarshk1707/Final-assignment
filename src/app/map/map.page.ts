@@ -22,9 +22,10 @@ export class MapPage {
     this.platform.ready().then(() => {
 
       let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
-
+    
     });
 
   }
+  
 
 }

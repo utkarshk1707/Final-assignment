@@ -1,34 +1,9 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { MenuController, ToastController, NavController } from '@ionic/angular';
-import { MapPage} from '../map/map.page'
-import {ListPage} from '../list/list.page'
-import { Routes } from '@angular/router';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
-const routes: Routes = [
-  {
-      path: '',
-      children: [
-          {
-              path: 'map',
-              outlet: 'map',
-              component: MapPage
-          },
-          {
-              path: 'list',
-              outlet: 'list',
-              component: ListPage 
-          }
-      ]
-  },
-  {
-      path: '',
-      redirectTo: '/home',
-      pathMatch: 'full'
-  }
-];
+import { Geoposition, GeolocationOptions } from '@ionic-native/geolocation';
 
 
+declare var google;
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -36,13 +11,43 @@ const routes: Routes = [
 })
 export class HomePage {
 
+  HotelsList: Boolean;
 
-  tab1Root: any = MapPage;
-  tab2Root: any = ListPage;
-
+  pos;
+  map;
   constructor() {
-  
+
   }
+
+  
+  ngOnInit(){
+   
+    this.initMap();
+  }
+  
+  initMap() {
+      // Set the default location and initialize all variables
+      this.pos = {lat: -33.857, lng: 151.213};
+      this.map = new google.maps.Map(document.getElementById('map'), {
+          center: this.pos,
+          zoom: 15
+      });
+
+      console.log(this.map);
+      console.log(this.pos);
+  }
+  showNearbyHotels(){
+
+   if('gethotels'){
+
+    this.HotelsList = true;
+   }
+   else{
+    this.HotelsList = false;
+   }
+
+  }
+
 
 }
 

@@ -1,17 +1,12 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title text-center>login</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content color="primary" padding>
-  <div class="container">
+<ion-content class="background-image" no-scroll padding>
+  <div class="container" >
 
     <form #form="ngForm" (ngSubmit)="login(form)">
       <ion-grid>
         <ion-row color="primary" >
           <ion-col >
-            <div class="logintext">
+            <div class="logintext1">
               <h3>Login</h3>
             </div>
             <div >
@@ -28,20 +23,26 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <div class="logintext">
-        If you don't have an account, please <a routerLink='/register'>
+          <div class="logintext2">
+            If you don't have an account, please <a routerLink='/register'>
           register</a> first!
           </div>
       </ion-row>
+      <ion-row>
+        <div class="logintext3">
+          Login With
+        </div>
+    </ion-row>
       </ion-grid>
     </form>
+    <ng-container>
+      <ion-button color="danger"class="stickToBottom" [disabled]="!form.valid" expand="block" (click)="googleSignIn()">
+        Google signin
+      </ion-button>
+    </ng-container>
   </div>
   
 </ion-content>
 <ion-footer>
-  <ng-container>
-    <ion-button class="stickToBottom" [disabled]="!form.valid" expand="block" (click)="googleSignIn()">
-      Google signin
-    </ion-button>
-  </ng-container>
+ 
 </ion-footer>
