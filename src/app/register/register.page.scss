@@ -1,13 +1,24 @@
 ion-item{
-    --background: #3880ff;
-    --color: #fff;
+    --background:lightblue;
+    --color: rgb(35, 17, 85);
 }
 
 ion-button{
     --background: #062f77;
 }
 .register{
-    margin-top: 20%;
-    margin-left: 40%;
+    margin-top: 220px;
+    margin-left: 700px;
 
+}
+:host {
+    .background-image {
+      --background: url('../img/Login.jpg') no-repeat 100% 100%;
+    }
+  }
+  
+.registertext1{
+
+    text-align: center;
+    color: darkcyan;
 }
