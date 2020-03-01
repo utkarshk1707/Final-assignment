@@ -41,6 +41,7 @@ export class DatabaseService {
       this.sqlitePorter.importSqlToDb(this.database, sql)
         .then(_ => {
           this.loadHotels();
+          this.loadUserData(null);  
           this.dbReady.next(true);
         })
         .catch(e => console.error(e));
@@ -116,7 +117,7 @@ export class DatabaseService {
     })
   }
  
-  loadUserData(email: String) {
+  loadUserData(email: string) {
     let query = 'SELECT * FROM userdata WHERE email ='+email;
     return this.database.executeSql(query, []).then(data => {
       let UserData = [];

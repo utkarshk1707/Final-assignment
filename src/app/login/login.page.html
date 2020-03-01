@@ -22,19 +22,16 @@
             </div>
           </ion-col>
         </ion-row>
-        <ion-row>
-          <div class="logintext2">
-            If you don't have an account, please <a routerLink='/register'>
-          register</a> first!
-          </div>
-      </ion-row>
-      <ion-row>
-        <div class="logintext3">
-          Login With
-        </div>
-    </ion-row>
+      
       </ion-grid>
     </form>
+    <div class="logintext2">
+      If you don't have an account, please <a routerLink='/register'>
+    register</a> first!
+    </div>
+    <div class="logintext3">
+      Login With
+    </div>
     <ng-container>
       <ion-button color="danger"class="stickToBottom" [disabled]="!form.valid" expand="block" (click)="googleSignIn()">
         Google signin
