@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebase : {
-    apiKey: "AIzaSyAa9upkri7Fx7yw7LF_6nBE-gX97KzZtOU",
-    authDomain: "hotelbooking-269120.firebaseapp.com",
-    databaseURL: "https://hotelbooking-269120.firebaseio.com",
-    projectId: "hotelbooking-269120",
-    storageBucket: "hotelbooking-269120.appspot.com",
-    messagingSenderId: "568409237974",
-    appId: "1:568409237974:web:70bcff2971e86fbb43dc77",
-    measurementId: "G-W8HY9J2EJS"
+    apiKey: "AIzaSyCyQV4UJOUcDpvIH47KW-JfifEpDnokHmU",
+    authDomain: "mytask-a812b.firebaseapp.com",
+    databaseURL: "https://mytask-a812b.firebaseio.com",
+    projectId: "mytask-a812b",
+    storageBucket: "mytask-a812b.appspot.com",
+    messagingSenderId: "106733389494",
+    appId: "1:106733389494:web:a37576512d4e6fbc6d8817",
+    measurementId: "G-K51ETG2CD3"
   }
 
 };

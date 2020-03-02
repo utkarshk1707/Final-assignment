@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {AngularFireAuthModule} from '@angular/fire/auth'
 import {AngularFireDatabaseModule} from '@angular/fire/database'
 import { from } from 'rxjs';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +35,7 @@ import { from } from 'rxjs';
     FormsModule,
     SQLite,
     SQLitePorter,
+    GooglePlus,
     ReactiveFormsModule,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Location,
