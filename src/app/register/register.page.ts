@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
-import { DatabaseService, Hotels } from '../services/database.service';
 import { Observable } from 'rxjs';
+import { SQLite ,SQLiteObject} from '@ionic-native/sqlite/ngx';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { JsonPipe } from '@angular/common';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -11,42 +15,50 @@ import { Observable } from 'rxjs';
 })
 export class RegisterPage implements OnInit {
 
-  products: Observable<any[]>;
-  Hotels : Hotels[];
   Hotel = {};
   userData = {};
  
+  name: string;
+  contact:string;
+  password: string;
+  cpassword: string;
   email: string;
   form: FormGroup;
-  constructor(private  router:  Router,private db: DatabaseService) { }
+  constructor(private  router:  Router,private sqlite: SQLite,public afAuth :AngularFireAuth, public afDB:AngularFireDatabase,public alertCtrl:AlertController) {
+    
+   }
 
   ngOnInit() {
-    this.db.getDatabaseState().subscribe(rdy => {
-      if (rdy) {
-        this.db.getDevs().subscribe(devs => {
-          this.Hotel = devs;
-        })
-        this.userData = this.db.getProducts();
-      }
-    });
+    
   }
 
+  async presentAlert( title:string,content: string){
 
-  register(form) {
+    const alert =await this.alertCtrl.create({
+      header: title,
+      message: content,
+      buttons:['ok']
+    })
     
-    try{
+    await alert.present()
 
-      console.log("my values"+JSON.stringify(form.value));
-      this.db.addUserData(this.email,JSON.stringify(form.value))
-      if(this.db.loadUserData(this.email)){
-      alert("Register succesfull");
-      }
-      this.router.navigateByUrl('/home');
-      
+  }
 
-    }catch(e){
-      console.log("register error:"+e)
+  async register() {
+    
+    if(this.password !== this.cpassword){
+      return console.error("password don't match")
     }
-      
+
+    try {
+      const res = await this.afAuth.auth.createUserWithEmailAndPassword(this.email,this.password);
+      // add user data to fire base 
+      this.presentAlert('success','you are registered!')
+      this.router.navigateByUrl('login');
+      console.log(res);
+    } catch (error) {
+      console.dir(error);
+    }
+ 
   }
 }

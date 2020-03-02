@@ -1,8 +1,8 @@
 
 <ion-content class="background-image" no-scroll padding>
   <div class="container" >
-
-    <form #form="ngForm" (ngSubmit)="login(form)">
+<!-- 
+    <form #form="ngForm" (ngSubmit)="login(form)"> -->
       <ion-grid>
         <ion-row color="primary" >
           <ion-col >
@@ -11,20 +11,20 @@
             </div>
             <div >
               <ion-item class="form-field">
-                <ion-input [(ngModel)] = "email" type="email" placeholder="your@email.com" [ngModelOptions]="{standalone: true}" required></ion-input>
+                <ion-input [(ngModel)] = "email" type="email" placeholder="Email" [ngModelOptions]="{standalone: true}" required></ion-input>
               </ion-item>
               <ion-item >
                 <ion-input class="form-field" [(ngModel)] = "password" type="password" placeholder="Password" [ngModelOptions]="{standalone: true}" required></ion-input>
               </ion-item>
             </div>
             <div>
-              <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
+              <ion-button size="large" type="submit" expand="block" (click)="login()">Login</ion-button>
             </div>
           </ion-col>
         </ion-row>
       
       </ion-grid>
-    </form>
+    <!-- </form> -->
     <div class="logintext2">
       If you don't have an account, please <a routerLink='/register'>
     register</a> first!
@@ -33,7 +33,7 @@
       Login With
     </div>
     <ng-container>
-      <ion-button color="danger"class="stickToBottom" [disabled]="!form.valid" expand="block" (click)="googleSignIn()">
+      <ion-button color="danger"class="stickToBottom" expand="block" (click)="googleSignIn()">
         Google signin
       </ion-button>
     </ng-container>

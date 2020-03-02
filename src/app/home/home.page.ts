@@ -1,9 +1,12 @@
-import { Component, ElementRef, ViewChild, NgZone } from '@angular/core';
+import { Component } from '@angular/core';
+import { Platform } from '@ionic/angular'
+import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
 
-import { Geoposition, GeolocationOptions } from '@ionic-native/geolocation';
 
 
+Hotels: new Array();
 declare var google;
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -11,84 +14,54 @@ declare var google;
 })
 export class HomePage {
 
-  // mapElement: ElementRef;
+  lat: any;
+  Lng: any;
+  options: GeolocationOptions;
+  currentPos: Geoposition;
+  places: Array<any>;
 
-  // map:any;
-  // latLng:any;
-  // markers:any;
-  // mapOptions:any;  
-  // isKM:any=500;
-  // isType:any="";
- 
-  constructor(private ngZone: NgZone, private geolocation : Geolocation) { }
+  constructor(public platform: Platform) {
 
-//   ionViewDidLoad() {
-//     this.loadMap();
-//   }
+    Geolocation.getCurrentPosition().then((position) => {
 
-//   loadMap(){
+      this.lat = position.coords.latitude
+      this.Lng = position.coords.longitude;
+      console.log(position.coords.latitude)
+      console.log(position.coords.longitude)
+    });
+    console.log(this.lat,this.Lng)
+    this.platform.ready().then(() => {
 
-//     this.geolocation.getCurrentPosition((position) => {
+      var gps = new google.maps.LatLng(28.635955199999998, 77.3390336)
+      var radius = 500;
+      this.getHotels(gps, radius);
+    })
 
-// this.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  }
 
-//           console.log('latLng',this.latLng);
-     
-//       this.mapOptions = {
-//         center: this.latLng,
-//         zoom: 14,
-//         mapTypeId: google.maps.MapTypeId.ROADMAP
-//       }   
+  getHotels(gps: any, radius: any) {
+    var container = document.getElementById('map')
+    var service = new google.maps.places.PlacesService(container);
+    let request = {
+      location: gps,
+      radius: radius,
+      types: ["hotels"]   
+    };
+    return new Promise((resolve, reject) => {
+      service.nearbySearch(request, function (results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          resolve(results);
+        } else {
+          reject(status);
+          alert(status);
+        }
 
-// this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
+      });
+    });
 
-//     }, (err) => {
-//       alert('err '+err);
-//     });
-
-//   }
-
-
-
-//   nearbyPlace(){
-//     this.loadMap();
-//     this.markers = [];
-//     let service = new google.maps.places.PlacesService(this.map);
-//     service.nearbySearch({
-//               location: this.latLng,
-//               radius: this.isKM,
-//               types: [this.isType]
-//             }, (results, status) => {
-//                 this.callback(results, status);
-//             });
-//   }
-
-//   callback(results, status) {
-//     if (status === google.maps.places.PlacesServiceStatus.OK) {
-//       for (var i = 0; i < results.length; i++) {
-//         this.createMarker(results[i]);
-//       }
-//     }
-//   }
-
-//   createMarker(place){
-//     var placeLoc = place;
-//     console.log('placeLoc',placeLoc);
-//     this.markers = new google.maps.Marker({
-//         map: this.map,
-//         position: place.geometry.location
-//     });
-
-//     let infowindow = new google.maps.InfoWindow();
-
-//     google.maps.event.addListener(this.markers, 'click', () => {
-//       this.ngZone.run(() => {
-//         infowindow.setContent(place.name);
-//         infowindow.open(this.map, this.markers);
-//       });
-//     });
-//   }
+  }
 
 }
+
 
 
