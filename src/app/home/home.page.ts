@@ -34,7 +34,11 @@ export class HomePage {
 
       var gps = new google.maps.LatLng(28.635955199999998, 77.3390336)
       var radius = 500;
-      this.getHotels(gps, radius);
+      this.getHotels(gps, radius).then((results:Array<any>)=>{
+
+        this.places= results;
+        console.log(this.places)
+      },(status)=>console.log(status));
     })
 
   }
