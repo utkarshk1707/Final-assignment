@@ -89,13 +89,13 @@ export class HomePage {
           snapshot.forEach(doc => {
             console.log(doc.id, '=>', doc.data().name);
             this.places.push(doc.data().name);
-
+            this.data =false;
           });
         }
       )
-      if(this.places.length > 1){
-        this.data =false;
-      }
+      // if(this.places.length > 1){
+      //   this.data =false;
+      // }
       console.log(this.places);
       console.log(hotelsREf);
 
