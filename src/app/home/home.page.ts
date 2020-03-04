@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular'
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
-
-
-
-Hotels: new Array();
-declare var google;
+import { element, error } from 'protractor';
+import {GoogleMaps} from '@ionic-native/google-maps'
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { firestore } from 'firebase';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
+ 
+var google = require('@ionic-native/google-maps') ;
 
 @Component({
   selector: 'app-home',
@@ -14,53 +18,105 @@ declare var google;
 })
 export class HomePage {
 
-  lat: any;
-  Lng: any;
+  
   options: GeolocationOptions;
   currentPos: Geoposition;
+  mapElement:HTMLElement;
   places: Array<any>;
-
-  constructor(public platform: Platform) {
+  hotels:[
+    {  
+      "id":1,
+      "name":"Hotel-1"
+   },
+   {  
+      "id":2,
+      "name":"Hotel-2"
+   }
+  ]
+  constructor(public platform: Platform,  public afAuth: AngularFireAuth,private firestore: AngularFirestore,private router: Router) {
+    this.platform.ready().then(() => {
 
     Geolocation.getCurrentPosition().then((position) => {
 
-      this.lat = position.coords.latitude
-      this.Lng = position.coords.longitude;
-      console.log(position.coords.latitude)
-      console.log(position.coords.longitude)
-    });
-    console.log(this.lat,this.Lng)
-    this.platform.ready().then(() => {
-
-      var gps = new google.maps.LatLng(28.635955199999998, 77.3390336)
+      console.log(position.coords.latitude, position.coords.longitude)
+      var gps = new google.map.LatLng(position.coords.latitude, position.coords.longitude)
       var radius = 500;
+      var tHis =this;
+      console.log(gps)
       this.getHotels(gps, radius).then((results:Array<any>)=>{
 
-        this.places= results;
-        console.log(this.places)
-      },(status)=>console.log(status));
-    })
+        results.forEach((element)=>{
 
+          tHis.places.push(element);
+        });
+        console.log(this.places);
+      },(status)=>console.log("status: "+status));
+    });
+
+    });
+   
+     
   }
 
+//   addData(){
+
+//     this.hotels.forEach(function(obj) {
+//       firebase.firestore().collection("hotels").add({
+//           id: obj.id,
+//           name: obj.name
+//       }).then(function(docRef) {
+//           console.log("Document written with ID: ", docRef.id);
+//       })
+//       .catch(function(error) {
+//           console.error("Error adding document: ", error);
+//       });
+//   }
+// }
+
+async signOut(){
+  try {
+    await  this.afAuth.auth.signOut().then(function(res) {
+      // Sign-out successful.
+      console.log(res);
+      this.router.navigateByUrl('/login');
+
+    alert("Logout Successfull");
+
+    }).catch(function(error) {
+      // An error happened.
+      console.log(error);
+    });
+
+    
+  }
+  catch (err) {
+    console.log(err);
+  }
+
+}
   getHotels(gps: any, radius: any) {
-    var container = document.getElementById('map')
-    var service = new google.maps.places.PlacesService(container);
+    
+    
+  
+    this.mapElement=document.getElementById('map');
+    console.log(this.mapElement);
+    var service = new google.maps.places.PlacesService(this.mapElement);
     let request = {
       location: gps,
       radius: radius,
       types: ["hotels"]   
     };
-    return new Promise((resolve, reject) => {
-      service.nearbySearch(request, function (results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          resolve(results);
-        } else {
-          reject(status);
-          alert(status);
-        }
+    service.nearbySearch(request, (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        console.log(results);
+      } else {
+        console.log(status);
+        alert(status);
+      }
 
-      });
+    });
+    return new Promise((resolve, reject) => {
+      
     });
 
   }
