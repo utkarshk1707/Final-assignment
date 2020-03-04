@@ -45,7 +45,7 @@ export class HomePage {
     this.isLoading = false;
     return await this.loadingController.dismiss().then(() => console.log('dismissed'));
   }
-  constructor(public platform: Platform, public afAuth: AngularFireAuth, private firestore: AngularFirestore, private router: Router,public loadingController:LoadingController) {
+  constructor(public platform: Platform, public afAuth: AngularFireAuth, private firestore: AngularFirestore, public router: Router,public loadingController:LoadingController) {
 
     this.getHotelsDbData();
     this.platform.ready().then(() => {
@@ -110,11 +110,13 @@ export class HomePage {
   }
 
   async signOut() {
+
+    var tHis =this
     try {
       await this.afAuth.auth.signOut().then(function (res) {
         // Sign-out successful.
         console.log(res);
-        this.router.navigateByUrl('/login');
+        tHis.router.navigateByUrl('/login');
 
         alert("Logout Successfull");
 
