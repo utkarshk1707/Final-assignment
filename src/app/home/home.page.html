@@ -11,15 +11,26 @@
 
 
 <ion-content class="loginContent">
-  <div class="map" id="map"> </div>
-  <script src="https://maps.googleapis.com/maps/api/place/nearbysearch/json?type=restaurant&&key=AIzaSyCHieemnqXzDfVcOkp_0ZzZh2VfC-jylZY"></script>
- 
+  <!-- <div class="map" id="map"> </div> -->
+  
   <div class="list">
-  <ion-card *ngFor="let place of places">
-    <ion-item>
-    <img src={{place.icon}} style ="width: 20px;height: 20px;"/>
-    {{place.name}}  
-    </ion-item>
+    <ion-card *ngIf="data">
+      <ion-card-content>
+          No Data
+      </ion-card-content>
   </ion-card>
+    <ion-card *ngFor="let place of places">
+      <ion-card-header>
+          <ion-card-subtitle>
+            {{place}}
+          </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+          NO-IMG
+      </ion-card-content>
+  </ion-card>
+  
+  
 </div>
 </ion-content>
