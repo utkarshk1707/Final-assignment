@@ -4,12 +4,13 @@ import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@io
 import { element, error } from 'protractor';
 import {GoogleMaps} from '@ionic-native/google-maps'
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { firestore } from 'firebase';
-import { AngularFirestore } from 'angularfire2/firestore';
+
+import { AngularFirestore} from 'angularfire2/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
  
 var google = require('@ionic-native/google-maps') ;
+
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ var google = require('@ionic-native/google-maps') ;
 })
 export class HomePage {
 
+ 
   
   options: GeolocationOptions;
   currentPos: Geoposition;
@@ -34,6 +36,8 @@ export class HomePage {
    }
   ]
   constructor(public platform: Platform,  public afAuth: AngularFireAuth,private firestore: AngularFirestore,private router: Router) {
+
+    this.getHotelsdata();
     this.platform.ready().then(() => {
 
     Geolocation.getCurrentPosition().then((position) => {
@@ -56,6 +60,19 @@ export class HomePage {
     });
    
      
+  }
+
+  getHotelsdata(){
+
+    
+    let setDoc = this.firestore.collection('hotels').doc('4').set({
+      name: 'hotel-4'
+    });
+    let hotelsREf = this.firestore.collection('hotels').get()
+
+    console.log(setDoc);
+
+    console.log(hotelsREf);
   }
 
 //   addData(){

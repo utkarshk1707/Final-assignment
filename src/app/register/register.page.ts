@@ -7,6 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { JsonPipe } from '@angular/common';
 import { AlertController } from '@ionic/angular';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,7 @@ export class RegisterPage implements OnInit {
   cpassword: string;
   email: string;
   form: FormGroup;
-  constructor(private  router:  Router,private sqlite: SQLite,public afAuth :AngularFireAuth, public afDB:AngularFireDatabase,public alertCtrl:AlertController) {
+  constructor(private  router:  Router,private sqlite: SQLite,public afAuth :AngularFireAuth, public firestore: AngularFirestore,public alertCtrl:AlertController) {
     
    }
 
@@ -53,6 +54,11 @@ export class RegisterPage implements OnInit {
     try {
       const res = await this.afAuth.auth.createUserWithEmailAndPassword(this.email,this.password);
       // add user data to fire base 
+      let setDoc = this.firestore.collection('users').doc(this.email).set({
+        name: this.name,
+        contact: this.contact
+      });
+      console.log(setDoc);
       this.presentAlert('success','you are registered!')
       this.router.navigateByUrl('login');
       console.log(res);

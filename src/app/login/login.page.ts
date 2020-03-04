@@ -66,8 +66,13 @@ export class LoginPage implements OnInit {
       if (err.code === "auth/invalid-email") {
         alert("user not found")
       }
-      if (err.code === "auth/email-already-in-use") {
-        alert("email already in use")
+      // if (err.code === "auth/email-already-in-use") {
+      //   alert("email already in use")
+      // }
+      // above commented check is for registration :p
+      if(err.code === "auth/network-request-failed"){
+
+        alert("network error");
       }
       
 
